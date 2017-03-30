@@ -48,3 +48,14 @@ C:\MS\SE\Project\ResourceServer.Api\bin\System.Web.Http.WebHost.xml
 C:\MS\SE\Project\ResourceServer.Api\obj\Debug\COS420WS.Api.csprojResolveAssemblyReference.cache
 C:\MS\SE\Project\ResourceServer.Api\obj\Debug\ResourceServer.Api.dll
 C:\MS\SE\Project\ResourceServer.Api\obj\Debug\ResourceServer.Api.pdb
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\ResourceServer.Api.dll.config
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\ResourceServer.Api.dll
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\ResourceServer.Api.pdb
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\obj\Debug\ResourceServer.Api.dll
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\obj\Debug\ResourceServer.Api.pdb
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\MySql.Data.dll
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\MySql.Data.Entity.dll
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\MySql.Data.Entity.EF6.dll
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\MySql.Data.xml
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\MySql.Data.Entity.EF6.xml
+C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\obj\Debug\COS420WS.Api.csprojResolveAssemblyReference.cache

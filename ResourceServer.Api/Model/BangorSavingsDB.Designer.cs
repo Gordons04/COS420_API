@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Iranga\Downloads\JWTAspNetWebApi-master\JWTAspNetWebApi-master\ResourceServer.Api\Model\BangorSavingsDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\Model\BangorSavingsDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

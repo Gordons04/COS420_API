@@ -180,6 +180,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ProtectedController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Interfaces\IHandler.cs" />
     <Compile Include="Model\BangorSavingsDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -196,7 +197,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BangorSavingsDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\criterion.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\interest.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\organization.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\organization_has_votes.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\reward.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\rewards_has_User_Profile.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\transaction.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\User_Profile.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\vote.cs">
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

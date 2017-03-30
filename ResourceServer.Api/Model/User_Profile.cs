@@ -14,6 +14,13 @@ namespace ResourceServer.Api.Model
     
     public partial class User_Profile
     {
+        public User_Profile()
+        {
+            this.rewards_has_User_Profile = new HashSet<rewards_has_User_Profile>();
+            this.transactions = new HashSet<transaction>();
+            this.votes = new HashSet<vote>();
+        }
+    
         public int uid { get; set; }
         public string username { get; set; }
         public string password { get; set; }
@@ -24,5 +31,9 @@ namespace ResourceServer.Api.Model
         public Nullable<System.DateTime> modifiedOn { get; set; }
         public string city { get; set; }
         public string email { get; set; }
+    
+        public virtual ICollection<rewards_has_User_Profile> rewards_has_User_Profile { get; set; }
+        public virtual ICollection<transaction> transactions { get; set; }
+        public virtual ICollection<vote> votes { get; set; }
     }
 }

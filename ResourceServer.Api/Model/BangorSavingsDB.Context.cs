@@ -26,5 +26,13 @@ namespace ResourceServer.Api.Model
         }
     
         public DbSet<User_Profile> User_Profile { get; set; }
+        public DbSet<criterion> criteria { get; set; }
+        public DbSet<interest> interests { get; set; }
+        public DbSet<organization> organizations { get; set; }
+        public DbSet<organization_has_votes> organization_has_votes { get; set; }
+        public DbSet<reward> rewards { get; set; }
+        public DbSet<rewards_has_User_Profile> rewards_has_User_Profile { get; set; }
+        public DbSet<transaction> transactions { get; set; }
+        public DbSet<vote> votes { get; set; }
     }
 }

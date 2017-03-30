@@ -129,5 +129,20 @@ namespace ResourceServer.Api.Util
 
             return true;
         }
+
+        public object GetAllVotes()
+        {
+            try
+            {
+                var list = (from d in dbModel.votes
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
