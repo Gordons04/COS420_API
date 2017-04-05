@@ -148,8 +148,8 @@ namespace ResourceServer.Api.Util
         {
             try
             {
-                var list = (from d in dbModel.votes
-                            select d).ToList();
+                var list = (from d in dbModel.organizations
+                            select new { county = d.county, name = d.name, id = d.id }).ToList();
 
                 return list;
             }
