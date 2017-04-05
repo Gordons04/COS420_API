@@ -14,6 +14,6 @@ namespace ResourceServer.Api.Interfaces
         object GetAllVotes();
         object IsUserNameAvailable(string userName);
         object ChangePassword(string userName, string newPassword);
-        
+        object GetCountyGroup();
     }
 }
