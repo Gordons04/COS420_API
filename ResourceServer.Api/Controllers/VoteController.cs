@@ -34,5 +34,23 @@ namespace ResourceServer.Api.Controllers
                 return InternalServerError();
             }
         }
+
+        [HttpGet]
+        public IHttpActionResult GetCountyGroup()
+        {
+            try
+            {
+                var CountyGroupNumber = handler.GetCountyGroup();
+
+                return Ok(CountyGroupNumber);
+            
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError();
+            }
+
+
+        }
     }
 }

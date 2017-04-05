@@ -144,5 +144,19 @@ namespace ResourceServer.Api.Util
                 return null;
             }
         }
+        public object GetCountyGroup()
+        {
+            try
+            {
+                var list = (from d in dbModel.votes
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
