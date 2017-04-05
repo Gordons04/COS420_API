@@ -179,7 +179,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LeaderBoardController.cs" />
+    <Compile Include="Controllers\PointsController.cs" />
     <Compile Include="Controllers\ProtectedController.cs" />
+    <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\TriviaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Interfaces\IHandler.cs" />
