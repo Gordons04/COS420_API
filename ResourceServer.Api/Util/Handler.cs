@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace ResourceServer.Api.Util
 {
@@ -156,6 +157,34 @@ namespace ResourceServer.Api.Util
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public bool RegisterVote(List<int> listOfOrgs)
+        {
+            try
+            {
+                foreach (var org in listOfOrgs)
+                {
+                    var vote = new vote()
+                    {
+                        date = DateTime.UtcNow
+                    };
+
+                    var orgHasVote = (from d in dbModel.organization_has_votes
+                                      where d.organization_id == org
+                                      select d
+                                      ).SingleOrDefault();
+
+                    orgHasVote.votes_id = vote.id;
+
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
     }

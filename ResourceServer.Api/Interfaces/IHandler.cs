@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace ResourceServer.Api.Interfaces
 {
@@ -15,5 +16,6 @@ namespace ResourceServer.Api.Interfaces
         object IsUserNameAvailable(string userName);
         object ChangePassword(string userName, string newPassword);
         object GetCountyGroup();
+        IHttpActionResult RegisterVote(List<int> listOfOrgs);
     }
 }

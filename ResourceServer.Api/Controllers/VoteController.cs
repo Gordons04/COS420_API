@@ -37,16 +37,17 @@ namespace ResourceServer.Api.Controllers
 
 
         [HttpGet]
-        public IHttpActionResult RegisterVote()
+        public IHttpActionResult RegisterVote(List<int> listOfOrgs)
         {
             try
             {
+                return handler.RegisterVote(listOfOrgs);
 
             }
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
