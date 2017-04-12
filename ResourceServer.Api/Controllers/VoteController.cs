@@ -35,6 +35,21 @@ namespace ResourceServer.Api.Controllers
             }
         }
 
+
+        [HttpGet]
+        public IHttpActionResult RegisterVote()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         [HttpGet]
         public IHttpActionResult GetCountyGroup()
         {
