@@ -16,6 +16,6 @@ namespace ResourceServer.Api.Interfaces
         object IsUserNameAvailable(string userName);
         object ChangePassword(string userName, string newPassword);
         object GetCountyGroup();
-        IHttpActionResult RegisterVote(List<int> listOfOrgs);
+        object RegisterVote(List<int> listOfOrgs);
     }
 }

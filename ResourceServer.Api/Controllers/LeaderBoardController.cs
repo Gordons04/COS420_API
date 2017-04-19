@@ -9,5 +9,7 @@ namespace ResourceServer.Api.Controllers
 {
     public class LeaderBoardController : ApiController
     {
+        
+
     }
 }
