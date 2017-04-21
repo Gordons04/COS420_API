@@ -192,5 +192,10 @@ namespace ResourceServer.Api.Util
         {
             throw new NotImplementedException();
         }
+
+        public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,5 +17,6 @@ namespace ResourceServer.Api.Interfaces
         object ChangePassword(string userName, string newPassword);
         object GetCountyGroup();
         IHttpActionResult RegisterVote(List<int> listOfOrgs);
+        IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
     }
 }

@@ -22,10 +22,21 @@ namespace ResourceServer.Api.Controllers
 
 		[HttpPost]
 		[Route("Feed")]
+        //johnsandiego - I added the try catch to get read of the error during compile. I also added this function in IHandler. 
 		public IHttpActionResult GetTwitterFeed([FromBody]dynamic body)
 		{
-			// Get the twitter feed
-		}
+            // Get the twitter feed
+            try
+            {
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError();
+            }
+        }
 
 	}
 }

@@ -46,10 +46,10 @@ namespace ResourceServer.Api.Controllers
                 return handler.RegisterVote(listOfOrgs);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return false;
+                return InternalServerError();
             }
         }
 
