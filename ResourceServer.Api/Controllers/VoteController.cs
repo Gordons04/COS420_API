@@ -19,7 +19,8 @@ namespace ResourceServer.Api.Controllers
             handler = _handler;
         }
 
-        [HttpGet]
+        [HttpPost]
+        [Route("GetVotes")]
         public IHttpActionResult GetAllVotes()
         {
             try
@@ -28,9 +29,7 @@ namespace ResourceServer.Api.Controllers
 
                 return Ok(listOfVotes);
             }
-#pragma warning disable CS0168 // Variable is declared but never used
             catch (Exception ex)
-#pragma warning restore CS0168 // Variable is declared but never used
             {
 
                 return InternalServerError();
@@ -38,7 +37,8 @@ namespace ResourceServer.Api.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
+        [Route("RegisterVote")]
         public IHttpActionResult RegisterVote(List<int> listOfOrgs)
         {
             try
@@ -53,7 +53,8 @@ namespace ResourceServer.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
+        [Route("GetCounties")]
         public IHttpActionResult GetCountyGroup()
         {
             try
