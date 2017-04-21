@@ -188,6 +188,9 @@ namespace ResourceServer.Api.Util
             }
         }
 
-       
+        IHttpActionResult IHandler.RegisterVote(List<int> listOfOrgs)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

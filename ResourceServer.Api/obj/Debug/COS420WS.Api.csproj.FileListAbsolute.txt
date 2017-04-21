@@ -80,3 +80,4 @@ C:\Users\Iranga\Source\Repos\COS420_API3\ResourceServer.Api\obj\Debug\ResourceSe
 C:\Users\johnp\Source\Repos\COS420_API2\ResourceServer.Api\obj\Debug\COS420WS.Api.csprojResolveAssemblyReference.cache
 C:\Users\johnp\Source\Repos\COS420_API2\ResourceServer.Api\obj\Debug\ResourceServer.Api.dll
 C:\Users\johnp\Source\Repos\COS420_API2\ResourceServer.Api\obj\Debug\ResourceServer.Api.pdb
+C:\Users\johnp\Source\Repos\COS420_API3\ResourceServer.Api\obj\Debug\COS420WS.Api.csprojResolveAssemblyReference.cache
