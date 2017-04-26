@@ -224,6 +224,38 @@ namespace ResourceServer.Api.Util
             throw new NotImplementedException();
         }
 
+        public object GetTriviaQuestion()
+        {
+                        try
+            {
+                var list = (from d in dbModel.votes
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public object GetAnswer()
+        {
+            try
+            {
+                var list = (from d in dbModel.votes
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
         public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
         {
             throw new NotImplementedException();
