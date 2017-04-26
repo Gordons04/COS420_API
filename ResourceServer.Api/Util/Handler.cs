@@ -145,12 +145,43 @@ namespace ResourceServer.Api.Util
                 return null;
             }
         }
-        public object GetCountyGroup()
+        public object GetCounties(string region)
         {
             try
             {
                 var list = (from d in dbModel.organizations
-                            select new { county = d.county, name = d.name, id = d.id }).ToList();
+                            where d.region == region
+                            select new { County = d.county }).ToList<object>();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public object GetCharities(string county)
+        {
+            try
+            {
+                var list = (from d in dbModel.organizations
+                            where d.county == county
+                            select new {Name = d.name, Id = d.id }).ToList<object>();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public object GetCountyRegions()
+        {
+            try
+            {
+                var list = (from d in dbModel.organizations
+                            select new { Region = d.region }).ToList();
 
                 return list;
             }

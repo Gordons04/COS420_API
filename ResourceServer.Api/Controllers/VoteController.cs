@@ -53,18 +53,63 @@ namespace ResourceServer.Api.Controllers
             }
         }
 
+      
         [HttpPost]
-        [Route("GetCounties")]
-        public IHttpActionResult GetCountyGroup()
+        [Route("GetCountyRegions")]
+        public IHttpActionResult GetCountyRegions()
         {
             try
             {
-                var CountyGroupNumber = handler.GetCountyGroup();
+                var CountyGroupNumber = handler.GetCountyRegions();
 
                 return Ok(CountyGroupNumber);
             
             }
             catch(Exception ex)
+            {
+                return InternalServerError();
+            }
+
+
+        }
+
+        [HttpPost]
+        [Route("GetCharities")]
+        public IHttpActionResult GetCharities([FromBody] dynamic body)
+        {
+            try
+            {
+
+                string county = body.County;
+
+                var list = handler.GetCharities(county);
+
+                return Ok(list);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+
+
+        }
+
+        [HttpPost]
+        [Route("GetCounties")]
+        public IHttpActionResult GetCounties([FromBody] dynamic body)
+        {
+            try
+            {
+
+                string region = body.Region;
+
+                var list = handler.GetCounties(region);
+
+                return Ok(list);
+
+            }
+            catch (Exception ex)
             {
                 return InternalServerError();
             }
