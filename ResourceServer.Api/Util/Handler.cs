@@ -226,7 +226,7 @@ namespace ResourceServer.Api.Util
 
         public object GetTriviaQuestion()
         {
-                        try
+          try
             {
                 var list = (from d in dbModel.votes
                             select d).ToList();
@@ -254,7 +254,36 @@ namespace ResourceServer.Api.Util
             }
         }
 
+        public object GetRewards()
+        {
+            try
+            {
+                var list = (from d in dbModel.rewards
+                            select d).ToList();
 
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public object GetTotalVotes()
+        {
+            try
+            {
+                var list = (from d in dbModel.rewards
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
         {

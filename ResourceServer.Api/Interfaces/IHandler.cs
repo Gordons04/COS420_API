@@ -14,6 +14,8 @@ namespace ResourceServer.Api.Interfaces
         object UpdateUser(string fName, string lName, string mobileNo, string city, string zip, string email,  string userName);
         object GetAllVotes();
         object IsUserNameAvailable(string userName);
+        object GetTotalVotes();
+        object GetRewards();
         object ChangePassword(string userName, string newPassword);
         object GetTriviaQuestion();
         object GetCountyRegions();
