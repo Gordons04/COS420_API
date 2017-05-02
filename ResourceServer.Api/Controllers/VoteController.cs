@@ -116,5 +116,26 @@ namespace ResourceServer.Api.Controllers
 
 
         }
+        [HttpPost]
+        [Route("GetInterest")]
+        public IHttpActionResult GetInterest([FromBody] dynamic body)
+        {
+            try
+            {
+
+                string interest = body.interest;
+
+                var list = handler.GetInterest(interest);
+
+                return Ok(list);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+
+
+        }
     }
 }

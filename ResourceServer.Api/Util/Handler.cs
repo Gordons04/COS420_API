@@ -289,5 +289,21 @@ namespace ResourceServer.Api.Util
         {
             throw new NotImplementedException();
         }
+
+        public object GetInterest(string interests_id)
+        {
+            try
+            {
+                var list = (from d in dbModel.interests
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
+
 }
