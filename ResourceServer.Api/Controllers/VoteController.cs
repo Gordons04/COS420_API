@@ -134,6 +134,7 @@ namespace ResourceServer.Api.Controllers
             {
                 return InternalServerError();
             }
+        }
         [HttpPost]
         [Route("GetCountyByInterest")]
         public IHttpActionResult GetCountyByInterest()
