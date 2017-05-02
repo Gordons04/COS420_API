@@ -295,7 +295,21 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.interests
-                            select new { interest_id = d.id }).ToList();
+                            select new { interest_ = d.id }).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public object GetCountyByInterest()
+        {
+            try
+            {
+                var list = (from d in dbModel.organizations
+                            select new { interest_id = d.interests_id }).ToList();
 
                 return list;
             }

@@ -123,7 +123,7 @@ namespace ResourceServer.Api.Controllers
             try
             {
 
-                string interest = body.interest;
+                string interest = body.Interest;
 
                 var list = handler.GetInterest(interest);
 
@@ -134,7 +134,21 @@ namespace ResourceServer.Api.Controllers
             {
                 return InternalServerError();
             }
+        [HttpPost]
+        [Route("GetCountyByInterest")]
+        public IHttpActionResult GetCountyByInterest()
+        {
+            try
+            {
+                var InterestGroupNumber = handler.GetCountyByInterest();
 
+                return Ok(InterestGroupNumber);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
 
         }
     }
