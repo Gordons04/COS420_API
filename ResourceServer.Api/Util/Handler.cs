@@ -295,7 +295,7 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.interests
-                            select d).ToList();
+                            select new { interest_id = d.id }).ToList();
 
                 return list;
             }
