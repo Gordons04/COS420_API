@@ -25,7 +25,7 @@ namespace ResourceServer.Api.Interfaces
         IHttpActionResult RegisterVote(List<int> listOfOrgs);
         IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
         object GetAnswer();
-        object GetInterest(string interests_id);
-        object GetCountyByInterest();
+        object GetInterest(int id);
+        object GetCountyByInterest(int interestID);
     }
 }
