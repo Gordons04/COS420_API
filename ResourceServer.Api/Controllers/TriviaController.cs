@@ -20,15 +20,35 @@ namespace ResourceServer.Api.Controllers
             handler = _handler;
 
         }
+
         [HttpPost]
         [Route("GetTrivia")]
-        public IHttpActionResult GetTriviaQuestion()
+        public IHttpActionResult GetTriviaQuestion([FromBody] dynamic body)
         {
             try
             {
-                var listOfTriviaQuestion = handler.GetTriviaQuestion();
+                var index = (int)body.Index;
 
-                return Ok(listOfTriviaQuestion);
+                var question = handler.GetTriviaQuestion(index);
+
+                return Ok(question);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError();
+            }
+        }
+
+        [HttpPost]
+        [Route("GetTriviaQuestions")]
+        public IHttpActionResult GetTriviaQuestions()
+        {
+            try
+            {
+                var questions = handler.GetTriviaQuestions();
+
+                return Ok(questions);
             }
             catch (Exception ex)
             {
@@ -39,11 +59,13 @@ namespace ResourceServer.Api.Controllers
 
         [HttpPost]
         [Route("GetAnswer")]
-        public IHttpActionResult GetAnswer()
+        public IHttpActionResult GetAnswer([FromBody] dynamic body)
         {
             try
             {
-                var listOfAnswer = handler.GetAnswer();
+                var qid = (int)body.Qid;
+
+                var listOfAnswer = handler.GetAnswer(qid);
 
                 return Ok(listOfAnswer);
             }

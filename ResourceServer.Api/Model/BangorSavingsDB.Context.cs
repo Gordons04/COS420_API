@@ -34,5 +34,6 @@ namespace ResourceServer.Api.Model
         public DbSet<rewards_has_User_Profile> rewards_has_User_Profile { get; set; }
         public DbSet<transaction> transactions { get; set; }
         public DbSet<vote> votes { get; set; }
+        public DbSet<trivia> trivias { get; set; }
     }
 }

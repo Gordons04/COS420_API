@@ -39,11 +39,14 @@ namespace ResourceServer.Api.Controllers
 
         [HttpPost]
         [Route("RegisterVote")]
-        public IHttpActionResult RegisterVote(List<int> listOfOrgs)
+        public IHttpActionResult RegisterVote([FromBody] dynamic body)
         {
             try
             {
-                return handler.RegisterVote(listOfOrgs);
+                int orgId = (int)body.OrgId;
+                string userName = (string)body.UserName;
+
+                return Ok(handler.VoteForOrg(orgId, userName));
 
             }
             catch (Exception ex)
@@ -56,7 +59,7 @@ namespace ResourceServer.Api.Controllers
       
         [HttpPost]
         [Route("GetCountyRegions")]
-        public IHttpActionResult GetCountyRegions()
+        public IHttpActionResult GetCountyRegions([FromBody] dynamic body)
         {
             try
             {
@@ -81,8 +84,11 @@ namespace ResourceServer.Api.Controllers
             {
 
                 string county = body.County;
+                string userName = body.UserName;
 
-                var list = handler.GetCharities(county);
+
+
+                var list = handler.GetCharities(county, userName);
 
                 return Ok(list);
 

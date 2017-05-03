@@ -19,7 +19,11 @@ namespace ResourceServer.Api.Controllers
         {
             _handler = handler;
         }
-
+        /// <summary>
+        /// Login API
+        /// </summary>
+        /// <param name="body">{"UserName":"user",	"Password":"pass#word1"} </param>
+        /// <returns>True or False</returns>
         [HttpPost]
         [Route("Login")]
         public IHttpActionResult Login([FromBody]dynamic body)

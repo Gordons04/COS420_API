@@ -43,7 +43,7 @@ namespace ResourceServer.Api.Util
         {
             try
             {
-                var user = (from d in dbModel.User_Profile.AsEnumerable() where d.username == userName  select d).SingleOrDefault();
+                var user = (from d in dbModel.User_Profile.AsEnumerable() where d.username == userName select d).SingleOrDefault();
 
                 if (user != null) //Exists
                 {
@@ -84,9 +84,9 @@ namespace ResourceServer.Api.Util
                     username = userName,
                     password = PasswordStorage.CreateHash(password)
                 };
-                    dbModel.User_Profile.Add(user);
-                    dbModel.SaveChanges();
-               
+                dbModel.User_Profile.Add(user);
+                dbModel.SaveChanges();
+
                 return true;
             }
             catch (Exception ex)
@@ -117,7 +117,7 @@ namespace ResourceServer.Api.Util
             }
         }
 
-        public object ChangePassword(string userName,  string newPassword)
+        public object ChangePassword(string userName, string newPassword)
         {
             var user = (from d in dbModel.User_Profile.AsEnumerable() where d.username == userName select d).SingleOrDefault();
 
@@ -151,7 +151,8 @@ namespace ResourceServer.Api.Util
             {
                 var list = (from d in dbModel.organizations
                             where d.region == region
-                            select new { County = d.county }).ToList<object>();
+                            orderby d.county
+                            select new { County = d.county }).Distinct().ToList<object>();
 
                 return list;
             }
@@ -161,13 +162,17 @@ namespace ResourceServer.Api.Util
             }
         }
 
-        public object GetCharities(string county)
+        public object GetCharities(string county, string userName)
         {
             try
             {
                 var list = (from d in dbModel.organizations
-                            where d.county == county
-                            select new {Name = d.name, Id = d.id }).ToList<object>();
+                            from e in dbModel.organization_has_votes
+                            from v in dbModel.votes
+                            from u in dbModel.User_Profile
+                            where d.county == county && d.id != e.organization_id && e.votes_id == v.id && v.User_Profile_uid == u.uid && u.username == userName
+                            orderby d.name
+                            select new { Name = d.name, Id = d.id }).Distinct().ToList<object>();
 
                 return list;
             }
@@ -181,7 +186,7 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.organizations
-                            select new { Region = d.region }).ToList();
+                            select new { Region = d.region }).Distinct().ToList();
 
                 return list;
             }
@@ -224,14 +229,72 @@ namespace ResourceServer.Api.Util
             throw new NotImplementedException();
         }
 
-        public object GetTriviaQuestion()
+        public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public object VoteForOrg(int orgId, string userName)
+        {
+            try
+            {
+                var vote = new vote()
+                {
+                    date = DateTime.UtcNow,
+                    User_Profile_uid = GetUserId(userName)
+                };
+
+                dbModel.votes.Add(vote);
+                dbModel.SaveChanges();
+
+                var voteorg = new organization_has_votes()
+                {
+                    organization_id = orgId,
+                    votes_id = vote.id
+                };
+
+                dbModel.organization_has_votes.Add(voteorg);
+                dbModel.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private int GetUserId(string userName)
+        {
+            try
+            {
+                return (from d in dbModel.User_Profile where d.username == userName select d.uid).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return -99;
+
+            }
+        }
+ 
+
+        public object GetTriviaQuestion(int index)
         {
           try
             {
-                var list = (from d in dbModel.votes
-                            select d).ToList();
+//                var qs = (from d in dbModel.trivias
+//                            where d.idtrivia == index
+//                            select d.question).SingleOrDefault();
 
-                return list;
+                var qs = (from d in dbModel.trivias
+                          where d.idtrivia == index
+                          select new { Question = d.question,
+                              Answer = d.answer,
+                              Wrong1 = d.wrong1,
+                              Wrong2 = d.wrong2}).SingleOrDefault();
+
+                return qs;
             }
             catch (Exception ex)
             {
@@ -239,14 +302,15 @@ namespace ResourceServer.Api.Util
             }
         }
 
-        public object GetAnswer()
+        public object GetAnswer(int qid)
         {
             try
             {
-                var list = (from d in dbModel.votes
-                            select d).ToList();
+                var ans = (from d in dbModel.trivias
+                            where d.idtrivia == qid
+                            select d.answer).SingleOrDefault();
 
-                return list;
+                return ans;
             }
             catch (Exception ex)
             {
@@ -285,10 +349,7 @@ namespace ResourceServer.Api.Util
             }
         }
 
-        public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public object GetCountiesByInterest(int id)
         {
@@ -312,6 +373,21 @@ namespace ResourceServer.Api.Util
                 var list = (from d in dbModel.interests
                            
                             select new { id = d.id, description = d.desc}).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public object GetTriviaQuestions()
+        {
+            try
+            {
+                var list = (from d in dbModel.trivias
+                            select new { Question = d.question, Qid = d.idtrivia }).ToList();
 
                 return list;
             }

@@ -66,6 +66,16 @@
           <Property Name="date" Type="datetime" Precision="0" />
           <Property Name="User_Profile_uid" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="trivia">
+          <Key>
+            <PropertyRef Name="idtrivia" />
+          </Key>
+          <Property Name="idtrivia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="varchar" MaxLength="100" />
+          <Property Name="answer" Type="varchar" MaxLength="45" />
+          <Property Name="wrong1" Type="varchar" MaxLength="45" />
+          <Property Name="wrong2" Type="varchar" MaxLength="45" />
+        </EntityType>
         <EntityType Name="User_Profile">
           <Key>
             <PropertyRef Name="uid" />
@@ -167,6 +177,7 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
           <EntitySet Name="rewards" EntityType="Self.rewards" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="rewards_has_User_Profile" EntityType="Self.rewards_has_User_Profile" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="transactions" EntityType="Self.transactions" Schema="cos420db" store:Type="Tables" />
+          <EntitySet Name="trivia" EntityType="Self.trivia" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="User_Profile" EntityType="Self.User_Profile" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="votes" EntityType="Self.votes" Schema="cos420db" store:Type="Tables" />
           <AssociationSet Name="fk_organization_interests1" Association="Self.fk_organization_interests1">
@@ -242,6 +253,7 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             <End Role="User_Profile" EntitySet="User_Profile" />
             <End Role="vote" EntitySet="votes" />
           </AssociationSet>
+          <EntitySet Name="trivias" EntityType="cos420dbModel.trivia" />
         </EntityContainer>
         <EntityType Name="criterion">
           <Key>
@@ -380,6 +392,16 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="trivia">
+          <Key>
+            <PropertyRef Name="idtrivia" />
+          </Key>
+          <Property Name="idtrivia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="answer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="wrong1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="wrong2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -471,6 +493,17 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
                 <ScalarProperty Name="User_Profile_uid" ColumnName="User_Profile_uid" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trivias">
+            <EntityTypeMapping TypeName="cos420dbModel.trivia">
+              <MappingFragment StoreEntitySet="trivia">
+                <ScalarProperty Name="wrong2" ColumnName="wrong2" />
+                <ScalarProperty Name="wrong1" ColumnName="wrong1" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="idtrivia" ColumnName="idtrivia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

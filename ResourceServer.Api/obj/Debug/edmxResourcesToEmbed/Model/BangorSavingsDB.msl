@@ -89,5 +89,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="trivias">
+      <EntityTypeMapping TypeName="cos420dbModel.trivia">
+        <MappingFragment StoreEntitySet="trivia">
+          <ScalarProperty Name="wrong2" ColumnName="wrong2" />
+          <ScalarProperty Name="wrong1" ColumnName="wrong1" />
+          <ScalarProperty Name="answer" ColumnName="answer" />
+          <ScalarProperty Name="question" ColumnName="question" />
+          <ScalarProperty Name="idtrivia" ColumnName="idtrivia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

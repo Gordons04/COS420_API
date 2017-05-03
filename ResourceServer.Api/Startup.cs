@@ -26,7 +26,7 @@ namespace ResourceServer.Api
             
 
             HttpConfiguration config = new HttpConfiguration();
-
+     
             config.DependencyResolver = new UnityResolver(container);
             config.MapHttpAttributeRoutes();
 
@@ -35,6 +35,8 @@ namespace ResourceServer.Api
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
            
             app.UseWebApi(config);
+
+            Swashbuckle.Bootstrapper.Init(config);
 
         }
 
