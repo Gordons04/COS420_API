@@ -290,7 +290,7 @@ namespace ResourceServer.Api.Util
             throw new NotImplementedException();
         }
 
-        public object GetInterest(int id)
+        public object GetCountiesByInterest(int id)
         {
             try
             {
@@ -305,12 +305,13 @@ namespace ResourceServer.Api.Util
                 return null;
             }
         }
-        public object GetCountyByInterest()
+        public object GetInterest(int interestID)
         {
             try
             {
-                var list = (from d in dbModel.organizations
-                            select new { interest_id = d.interests_id }).ToList();
+                var list = (from d in dbModel.interests
+                           
+                            select new { id = d.id, description = d.desc}).ToList();
 
                 return list;
             }

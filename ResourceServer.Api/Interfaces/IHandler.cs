@@ -25,6 +25,6 @@ namespace ResourceServer.Api.Interfaces
         IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
         object GetAnswer();
         object GetInterest(int id);
-        object GetCountyByInterest();
+        object GetCountiesByInterest(int interestID);
     }
 }
