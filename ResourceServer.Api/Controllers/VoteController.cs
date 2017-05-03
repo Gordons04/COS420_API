@@ -123,7 +123,7 @@ namespace ResourceServer.Api.Controllers
             try
             {
 
-                string interest = body.Interest;
+                int interest = body.Interest;
 
                 var list = handler.GetInterest(interest);
 

@@ -290,12 +290,13 @@ namespace ResourceServer.Api.Util
             throw new NotImplementedException();
         }
 
-        public object GetInterest(string interests_id)
+        public object GetInterest(int id)
         {
             try
             {
-                var list = (from d in dbModel.interests
-                            select new { interest_ = d.id }).ToList();
+                var list = (from d in dbModel.organizations
+                            where d.interests_id == id
+                            select new { Name = d.name, Id = d.id }).ToList<object>();
 
                 return list;
             }
