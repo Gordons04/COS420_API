@@ -122,5 +122,41 @@ namespace ResourceServer.Api.Controllers
 
 
         }
+        [HttpPost]
+        [Route("GetInterest")]
+        public IHttpActionResult GetInterest([FromBody] dynamic body)
+        {
+            try
+            {
+
+                string interest = body.Interest;
+
+                var list = handler.GetInterest(interest);
+
+                return Ok(list);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
+        [HttpPost]
+        [Route("GetCountyByInterest")]
+        public IHttpActionResult GetCountyByInterest()
+        {
+            try
+            {
+                var InterestGroupNumber = handler.GetCountyByInterest();
+
+                return Ok(InterestGroupNumber);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+
+        }
     }
 }

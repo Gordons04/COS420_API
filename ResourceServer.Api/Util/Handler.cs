@@ -151,8 +151,7 @@ namespace ResourceServer.Api.Util
             {
                 var list = (from d in dbModel.organizations
                             where d.region == region
-                            orderby d.county
-                            select new { County = d.county }).Distinct().ToList<object>();
+                            select new { County = d.county }).ToList<object>();
 
                 return list;
             }
@@ -162,17 +161,13 @@ namespace ResourceServer.Api.Util
             }
         }
 
-        public object GetCharities(string county, string userName)
+        public object GetCharities(string county)
         {
             try
             {
-                var list = (from d in dbModel.organizations 
-                            from e in dbModel.organization_has_votes  
-                            from v in dbModel.votes        
-                            from u in dbModel.User_Profile                  
-                            where d.county == county && d.id != e.organization_id && e.votes_id == v.id &&  v.User_Profile_uid == u.uid && u.username == userName
-                            orderby d.name
-                            select new {Name = d.name, Id = d.id }).Distinct().ToList<object>();
+                var list = (from d in dbModel.organizations
+                            where d.county == county
+                            select new {Name = d.name, Id = d.id }).ToList<object>();
 
                 return list;
             }
@@ -186,7 +181,7 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.organizations
-                            select new { Region = d.region }).Distinct().ToList();
+                            select new { Region = d.region }).ToList();
 
                 return list;
             }
@@ -229,53 +224,100 @@ namespace ResourceServer.Api.Util
             throw new NotImplementedException();
         }
 
+        public object GetTriviaQuestion()
+        {
+          try
+            {
+                var list = (from d in dbModel.votes
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public object GetAnswer()
+        {
+            try
+            {
+                var list = (from d in dbModel.votes
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public object GetRewards()
+        {
+            try
+            {
+                var list = (from d in dbModel.rewards
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public object GetTotalVotes()
+        {
+            try
+            {
+                var list = (from d in dbModel.rewards
+                            select d).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
         {
             throw new NotImplementedException();
         }
 
-
-        public object VoteForOrg(int orgId, string userName)
+        public object GetInterest(string interests_id)
         {
             try
             {
-                var vote = new vote()
-                {
-                    date = DateTime.UtcNow,
-                    User_Profile_uid = GetUserId(userName)
-                };
+                var list = (from d in dbModel.interests
+                            select new { interest_ = d.id }).ToList();
 
-                dbModel.votes.Add(vote);
-                dbModel.SaveChanges();
-
-                var voteorg = new organization_has_votes()
-                {
-                    organization_id = orgId,
-                    votes_id = vote.id
-                };
-
-                dbModel.organization_has_votes.Add(voteorg);
-                dbModel.SaveChanges();
-
-                return true;
+                return list;
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
-
-        private int GetUserId(string userName)
+        public object GetCountyByInterest()
         {
             try
             {
-                return (from d in dbModel.User_Profile where d.username == userName select d.uid).SingleOrDefault();
+                var list = (from d in dbModel.organizations
+                            select new { interest_id = d.interests_id }).ToList();
+
+                return list;
             }
             catch (Exception ex)
             {
-                return -99;
-                
+                return null;
             }
         }
     }
+
 }
