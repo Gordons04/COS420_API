@@ -150,6 +150,7 @@ C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\System.Web.Http.xm
 C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\System.Web.Http.Owin.xml
 C:\Users\johnp\Source\Repos\COS420_API\ResourceServer.Api\bin\System.Web.Http.WebHost.xml
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\ResourceServer.Api.dll.config
+C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\ResourceServer.Api.XML
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\ResourceServer.Api.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\ResourceServer.Api.pdb
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\EntityFramework.dll
@@ -160,16 +161,19 @@ C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Microsoft.Owin.H
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Microsoft.Owin.Security.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Microsoft.Owin.Security.Jwt.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\MySql.Data.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\MySql.Data.Entity.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\MySql.Data.Entity.EF6.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Newtonsoft.Json.dll
+C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Swashbuckle.Core.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Net.Http.Formatting.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Cors.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Http.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Http.Owin.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Http.WebHost.dll
+C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\WebActivatorEx.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\EntityFramework.xml
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\EntityFramework.SqlServer.xml
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\Microsoft.Owin.xml
@@ -186,6 +190,6 @@ C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Net.Http.
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Http.xml
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Http.Owin.xml
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\bin\System.Web.Http.WebHost.xml
-C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\obj\Debug\COS420WS.Api.csprojResolveAssemblyReference.cache
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\obj\Debug\ResourceServer.Api.dll
 C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\obj\Debug\ResourceServer.Api.pdb
+C:\Users\Iranga\Source\Repos\COS420_API4\ResourceServer.Api\obj\Debug\COS420WS.Api.csprojResolveAssemblyReference.cache
