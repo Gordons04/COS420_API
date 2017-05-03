@@ -24,8 +24,7 @@ namespace ResourceServer.Api.Interfaces
         object VoteForOrg(int orgId, string userName);
         IHttpActionResult RegisterVote(List<int> listOfOrgs);
         IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
-        object GetTriviaQuestions();
-        object GetAnswer(int qid);
+        object GetAnswer();
         object GetInterest(string interests_id);
         object GetCountyByInterest();
     }
