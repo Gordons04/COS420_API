@@ -283,9 +283,16 @@ namespace ResourceServer.Api.Util
         {
           try
             {
+//                var qs = (from d in dbModel.trivias
+//                            where d.idtrivia == index
+//                            select d.question).SingleOrDefault();
+
                 var qs = (from d in dbModel.trivias
-                            where d.idtrivia == index
-                            select d.question).SingleOrDefault();
+                          where d.idtrivia == index
+                          select new { Question = d.question,
+                              Answer = d.answer,
+                              Wrong1 = d.wrong1,
+                              Wrong2 = d.wrong2}).SingleOrDefault();
 
                 return qs;
             }
