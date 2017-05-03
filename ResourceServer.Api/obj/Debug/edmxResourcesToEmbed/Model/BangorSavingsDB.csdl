@@ -48,6 +48,7 @@
       <End Role="User_Profile" EntitySet="User_Profile" />
       <End Role="vote" EntitySet="votes" />
     </AssociationSet>
+    <EntitySet Name="trivias" EntityType="cos420dbModel.trivia" />
   </EntityContainer>
   <EntityType Name="criterion">
     <Key>
@@ -186,4 +187,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="trivia">
+    <Key>
+      <PropertyRef Name="idtrivia" />
+    </Key>
+    <Property Name="idtrivia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="question" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="answer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="wrong1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="wrong2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

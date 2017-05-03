@@ -17,14 +17,15 @@ namespace ResourceServer.Api.Interfaces
         object GetTotalVotes();
         object GetRewards();
         object ChangePassword(string userName, string newPassword);
-        object GetTriviaQuestion();
+        object GetTriviaQuestion(int index);
         object GetCountyRegions();
         object GetCharities(string county, string userName);
         object GetCounties(string region);
         object VoteForOrg(int orgId, string userName);
         IHttpActionResult RegisterVote(List<int> listOfOrgs);
         IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
-        object GetAnswer();
+        object GetTriviaQuestions();
+        object GetAnswer(int qid);
         object GetInterest(string interests_id);
         object GetCountyByInterest();
     }
