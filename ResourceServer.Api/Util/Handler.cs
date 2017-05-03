@@ -151,7 +151,8 @@ namespace ResourceServer.Api.Util
             {
                 var list = (from d in dbModel.organizations
                             where d.region == region
-                            select new { County = d.county }).ToList<object>();
+                            orderby d.county
+                            select new { County = d.county }).Distinct().ToList<object>();
 
                 return list;
             }
@@ -161,13 +162,17 @@ namespace ResourceServer.Api.Util
             }
         }
 
-        public object GetCharities(string county)
+        public object GetCharities(string county, string userName)
         {
             try
             {
-                var list = (from d in dbModel.organizations
-                            where d.county == county
-                            select new {Name = d.name, Id = d.id }).ToList<object>();
+                var list = (from d in dbModel.organizations 
+                            from e in dbModel.organization_has_votes  
+                            from v in dbModel.votes        
+                            from u in dbModel.User_Profile                  
+                            where d.county == county && d.id != e.organization_id && e.votes_id == v.id &&  v.User_Profile_uid == u.uid && u.username == userName
+                            orderby d.name
+                            select new {Name = d.name, Id = d.id }).Distinct().ToList<object>();
 
                 return list;
             }
@@ -181,7 +186,7 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.organizations
-                            select new { Region = d.region }).ToList();
+                            select new { Region = d.region }).Distinct().ToList();
 
                 return list;
             }
@@ -227,6 +232,50 @@ namespace ResourceServer.Api.Util
         public IHttpActionResult GetTwitterFeed([FromBody] dynamic body)
         {
             throw new NotImplementedException();
+        }
+
+
+        public object VoteForOrg(int orgId, string userName)
+        {
+            try
+            {
+                var vote = new vote()
+                {
+                    date = DateTime.UtcNow,
+                    User_Profile_uid = GetUserId(userName)
+                };
+
+                dbModel.votes.Add(vote);
+                dbModel.SaveChanges();
+
+                var voteorg = new organization_has_votes()
+                {
+                    organization_id = orgId,
+                    votes_id = vote.id
+                };
+
+                dbModel.organization_has_votes.Add(voteorg);
+                dbModel.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private int GetUserId(string userName)
+        {
+            try
+            {
+                return (from d in dbModel.User_Profile where d.username == userName select d.uid).SingleOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return -99;
+                
+            }
         }
     }
 }

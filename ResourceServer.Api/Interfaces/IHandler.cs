@@ -16,8 +16,9 @@ namespace ResourceServer.Api.Interfaces
         object IsUserNameAvailable(string userName);
         object ChangePassword(string userName, string newPassword);
         object GetCountyRegions();
-        object GetCharities(string county);
+        object GetCharities(string county, string userName);
         object GetCounties(string region);
+        object VoteForOrg(int orgId, string userName);
         IHttpActionResult RegisterVote(List<int> listOfOrgs);
         IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
     }

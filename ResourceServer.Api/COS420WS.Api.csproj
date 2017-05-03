@@ -231,6 +231,9 @@
     <Compile Include="Model\transaction.cs">
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\trivia.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\User_Profile.cs">
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
