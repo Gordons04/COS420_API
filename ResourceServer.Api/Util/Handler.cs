@@ -351,12 +351,13 @@ namespace ResourceServer.Api.Util
 
        
 
-        public object GetInterest(string interests_id)
+        public object GetCountiesByInterest(int id)
         {
             try
             {
-                var list = (from d in dbModel.interests
-                            select new { interest_ = d.id }).ToList();
+                var list = (from d in dbModel.organizations
+                            where d.interests_id == id
+                            select new { Name = d.name, Id = d.id }).ToList<object>();
 
                 return list;
             }
@@ -365,12 +366,13 @@ namespace ResourceServer.Api.Util
                 return null;
             }
         }
-        public object GetCountyByInterest()
+        public object GetInterest(int interestID)
         {
             try
             {
-                var list = (from d in dbModel.organizations
-                            select new { interest_id = d.interests_id }).ToList();
+                var list = (from d in dbModel.interests
+                           
+                            select new { id = d.id, description = d.desc}).ToList();
 
                 return list;
             }

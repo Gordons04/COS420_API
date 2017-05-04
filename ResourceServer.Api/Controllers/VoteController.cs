@@ -129,7 +129,7 @@ namespace ResourceServer.Api.Controllers
             try
             {
 
-                string interest = body.Interest;
+                int interest = body.Interest;
 
                 var list = handler.GetInterest(interest);
 
@@ -143,13 +143,15 @@ namespace ResourceServer.Api.Controllers
         }
         [HttpPost]
         [Route("GetCountyByInterest")]
-        public IHttpActionResult GetCountyByInterest()
+        public IHttpActionResult GetCountiesByInterest([FromBody] dynamic body)
         {
             try
             {
-                var InterestGroupNumber = handler.GetCountyByInterest();
+                int interest = body.Interest;
 
-                return Ok(InterestGroupNumber);
+                var list = handler.GetCountiesByInterest(interest);
+
+                return Ok(list);
 
             }
             catch (Exception ex)
