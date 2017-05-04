@@ -38,5 +38,20 @@ namespace ResourceServer.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("GetUserFirstName")]
+        public IHttpActionResult GetUserFirstName([FromBody]dynamic body)
+        {
+            try
+            {
+                var userName = (string)body.Username;
+                var realName = _handler.GetUserFirstName(userName);
+                return Ok(realName);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
 	}
 }

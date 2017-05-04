@@ -38,6 +38,9 @@ namespace ResourceServer.Api.Util
 
         }
 
+
+
+
         //Update User Profile. This can only be accessed through protected User controller.
         public object UpdateUser(string fName, string lName, string mobileNo, string city, string zip, string email, string userName)
         {
@@ -117,6 +120,7 @@ namespace ResourceServer.Api.Util
             }
         }
 
+
         public object ChangePassword(string userName, string newPassword)
         {
             var user = (from d in dbModel.User_Profile.AsEnumerable() where d.username == userName select d).SingleOrDefault();
@@ -129,6 +133,28 @@ namespace ResourceServer.Api.Util
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Returns the users real first name.
+        /// </summary>
+        public object GetUserFirstName(string userName)
+        {
+            try
+            {
+                //Find user in database by searching via username
+                var user = (from d in dbModel.User_Profile.AsEnumerable() where d.username == userName select d).SingleOrDefault();
+
+                if (user != null)
+                    return user.fName;
+                else
+                    return "Null";
+            }
+
+            catch (Exception ex)
+            {
+                return "Null";
+            }
         }
 
         public object GetAllVotes()
