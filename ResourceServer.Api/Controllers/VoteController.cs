@@ -122,43 +122,43 @@ namespace ResourceServer.Api.Controllers
 
 
         }
-        [HttpPost]
-        [Route("GetInterest")]
-        public IHttpActionResult GetInterest([FromBody] dynamic body)
-        {
-            try
-            {
+        //[HttpPost]
+        //[Route("GetInterest")]
+        //public IHttpActionResult GetInterest([FromBody] dynamic body)
+        //{
+        //    try
+        //    {
 
-                int interest = body.Interest;
+        //        //int interest = body.Interest;
 
-                var list = handler.GetInterest(interest);
+        //        //var list = handler.GetInterest(interest);
 
-                return Ok(list);
+        //        //return Ok(list);
 
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError();
-            }
-        }
-        [HttpPost]
-        [Route("GetCountyByInterest")]
-        public IHttpActionResult GetCountiesByInterest([FromBody] dynamic body)
-        {
-            try
-            {
-                int interest = body.Interest;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return InternalServerError();
+        //    }
+        //}
+        //[HttpPost]
+        //[Route("GetCountyByInterest")]
+        //public IHttpActionResult GetCountiesByInterest([FromBody] dynamic body)
+        //{
+        //    try
+        //    {
+        //        int interest = body.Interest;
 
-                var list = handler.GetCountiesByInterest(interest);
+        //        var list = handler.GetCountiesByInterest(interest);
 
-                return Ok(list);
+        //        return Ok(list);
 
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError();
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return InternalServerError();
+        //    }
 
-        }
+        //}
     }
 }

@@ -484,7 +484,15 @@ namespace ResourceServer.Api.Util
             }
         }
 
-   
+        public object GetInterest(string interests_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetCountyByInterest()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -81,7 +81,7 @@ namespace ResourceServer.Api.Controllers
             {
                 var qid = (int)body.Qid;
                 var point = (int)body.Point;
-                var userName = body.UserName;
+                var userName = (string)body.UserName;
 
                 var result = handler.UpdatePoints(qid, point, userName);
 
