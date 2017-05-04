@@ -32,6 +32,41 @@ namespace ResourceServer.Api.Controllers
         }
 
         [HttpPost]
+        [Route("GetTotalPoints")]
+        public IHttpActionResult GetTotalPoints([FromBody] dynamic body)
+        {
+            try
+            {
+                var userName = body.UserName;
+
+                var result = _handler.GetTotalPoints(userName);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
+
+        [HttpPost]
+        [Route("GetTotalPointsOfAll")]
+        public IHttpActionResult GetTotalPointsOfAll([FromBody] dynamic body)
+        {
+            try
+            {               
+
+                var result = _handler.GetTotalPointsOfAll();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
+
+        [HttpPost]
         [Route("UpdateProfile")]
         public IHttpActionResult UpdateProfile([FromBody]dynamic body)
         {

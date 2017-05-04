@@ -236,6 +236,9 @@
     <Compile Include="Model\organization_has_votes.cs">
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\point.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\reward.cs">
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
@@ -246,6 +249,9 @@
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\trivia.cs">
+      <DependentUpon>BangorSavingsDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\triviapoint.cs">
       <DependentUpon>BangorSavingsDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\User_Profile.cs">

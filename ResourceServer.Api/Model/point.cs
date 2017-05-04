@@ -12,20 +12,13 @@ namespace ResourceServer.Api.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class trivia
+    public partial class point
     {
-        public trivia()
-        {
-            this.triviapoints = new HashSet<triviapoint>();
-        }
-    
-        public int idtrivia { get; set; }
-        public string question { get; set; }
-        public string answer { get; set; }
-        public string wrong1 { get; set; }
-        public string wrong2 { get; set; }
+        public int idpoints { get; set; }
         public Nullable<int> points { get; set; }
+        public Nullable<System.DateTime> datemodified { get; set; }
+        public Nullable<int> userid { get; set; }
     
-        public virtual ICollection<triviapoint> triviapoints { get; set; }
+        public virtual User_Profile User_Profile { get; set; }
     }
 }

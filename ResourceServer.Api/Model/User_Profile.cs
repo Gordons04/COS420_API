@@ -16,8 +16,10 @@ namespace ResourceServer.Api.Model
     {
         public User_Profile()
         {
+            this.points = new HashSet<point>();
             this.rewards_has_User_Profile = new HashSet<rewards_has_User_Profile>();
             this.transactions = new HashSet<transaction>();
+            this.triviapoints = new HashSet<triviapoint>();
             this.votes = new HashSet<vote>();
         }
     
@@ -31,9 +33,12 @@ namespace ResourceServer.Api.Model
         public Nullable<System.DateTime> modifiedOn { get; set; }
         public string city { get; set; }
         public string email { get; set; }
+        public byte[] pic { get; set; }
     
+        public virtual ICollection<point> points { get; set; }
         public virtual ICollection<rewards_has_User_Profile> rewards_has_User_Profile { get; set; }
         public virtual ICollection<transaction> transactions { get; set; }
+        public virtual ICollection<triviapoint> triviapoints { get; set; }
         public virtual ICollection<vote> votes { get; set; }
     }
 }

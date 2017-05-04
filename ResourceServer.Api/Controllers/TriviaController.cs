@@ -18,7 +18,6 @@ namespace ResourceServer.Api.Controllers
         public TriviaController(IHandler _handler)
         {
             handler = _handler;
-
         }
 
         [HttpPost]
@@ -35,7 +34,6 @@ namespace ResourceServer.Api.Controllers
             }
             catch (Exception ex)
             {
-
                 return InternalServerError();
             }
         }
@@ -52,7 +50,6 @@ namespace ResourceServer.Api.Controllers
             }
             catch (Exception ex)
             {
-
                 return InternalServerError();
             }
         }
@@ -71,7 +68,45 @@ namespace ResourceServer.Api.Controllers
             }
             catch (Exception ex)
             {
+                return InternalServerError();
+            }
 
+        }
+
+        [HttpPost]
+        [Route("UpdatePoints")]
+        public IHttpActionResult UpdatePoints([FromBody] dynamic body)
+        {
+            try
+            {
+                var qid = (int)body.Qid;
+                var point = (int)body.Point;
+                var userName = body.UserName;
+
+                var result = handler.UpdatePoints(qid, point, userName);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
+
+        [HttpPost]
+        [Route("GetTotalTriviaPoints")]
+        public IHttpActionResult GetTotalTriviaPoints([FromBody] dynamic body)
+        {
+            try
+            {
+                var userName = body.UserName;
+
+                var result = handler.GetTotalTriviaPoints( userName);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
                 return InternalServerError();
             }
         }

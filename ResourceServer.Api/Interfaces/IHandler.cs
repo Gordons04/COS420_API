@@ -23,10 +23,14 @@ namespace ResourceServer.Api.Interfaces
         object GetCounties(string region);
         object VoteForOrg(int orgId, string userName);
         IHttpActionResult RegisterVote(List<int> listOfOrgs);
+        object GetTotalPoints(string userName);
         IHttpActionResult GetTwitterFeed([FromBody]dynamic body);
         object GetTriviaQuestions();
         object GetAnswer(int qid);
         object GetInterest(string interests_id);
         object GetCountyByInterest();
+        object UpdatePoints(int qid, int point, string userName);
+        object GetTotalTriviaPoints(string userName);
+        object GetTotalPointsOfAll();
     }
 }

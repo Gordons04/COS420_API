@@ -384,8 +384,8 @@ namespace ResourceServer.Api.Util
         {
             try
             {
-                var list = (from d in dbModel.trivias
-                            select new { Question = d.question, Qid = d.idtrivia }).ToList();
+                var list = (from d in dbModel.trivias.AsEnumerable()
+                            select new { Question = d.question, Qid = d.idtrivia, Answers = new String[] {d.answer, d.wrong1, d.wrong2 }, Correct = new Random().Next(0,2), Points = d.points }).ToList();
 
                 return list;
             }
@@ -394,6 +394,95 @@ namespace ResourceServer.Api.Util
                 return null;
             }
         }
+
+        public object UpdatePoints(int qid, int point, string userName)
+        {
+            try
+            {
+                int userId = (from d in dbModel.User_Profile where d.username == userName select d.uid).SingleOrDefault();
+
+                var points = new triviapoint()
+                {
+                    Date = DateTime.UtcNow,
+                    Points = point,
+                    qsid = qid,
+                    UserID = userId
+                };
+
+                dbModel.triviapoints.Add(points);
+                dbModel.SaveChanges();
+
+
+                var totalpoints = (from d in dbModel.points where d.userid == userId select d).SingleOrDefault();
+
+                if (totalpoints != null)
+                {
+                    var cur_points = (int)totalpoints.points;
+                    cur_points += point;
+
+                    totalpoints.datemodified = DateTime.UtcNow;
+                    totalpoints.points = cur_points;
+
+                    dbModel.SaveChanges();
+                }
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+           
+        public object GetTotalTriviaPoints(string userName)
+        {
+            try
+            {
+                int userId = (from d in dbModel.User_Profile where d.username == userName select d.uid).SingleOrDefault();
+
+                var total = (from d in dbModel.triviapoints.AsEnumerable() where d.UserID == userId && d.Date.Value.Date == DateTime.UtcNow.Date select d.Points).Sum();
+
+                return total;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public object GetTotalPoints(string userName)
+        {
+            try
+            {
+                int userId = (from d in dbModel.User_Profile where d.username == userName select d.uid).SingleOrDefault();
+
+                var total = (from d in dbModel.points where d.userid == userId select d.points).SingleOrDefault();
+
+                return total;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public object GetTotalPointsOfAll()
+        {
+            try
+            {
+                var list = (from d in dbModel.points join e in dbModel.User_Profile on d.userid equals e.uid orderby d.points descending
+                             select new {FirstName  = e.fName, LastName = e.lName, d.points, d.datemodified, e.pic }).Take(20).ToList();
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+   
     }
 
 }

@@ -39,6 +39,15 @@
           <Property Name="organization_id" Type="int" Nullable="false" />
           <Property Name="votes_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="points">
+          <Key>
+            <PropertyRef Name="idpoints" />
+          </Key>
+          <Property Name="idpoints" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="points" Type="int" />
+          <Property Name="datemodified" Type="datetime" Precision="0" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
         <EntityType Name="rewards">
           <Key>
             <PropertyRef Name="id" />
@@ -75,6 +84,17 @@
           <Property Name="answer" Type="varchar" MaxLength="45" />
           <Property Name="wrong1" Type="varchar" MaxLength="45" />
           <Property Name="wrong2" Type="varchar" MaxLength="45" />
+          <Property Name="points" Type="int" />
+        </EntityType>
+        <EntityType Name="triviapoints">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Points" Type="double" />
+          <Property Name="Date" Type="datetime" Precision="0" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="qsid" Type="int" />
         </EntityType>
         <EntityType Name="User_Profile">
           <Key>
@@ -90,6 +110,7 @@
           <Property Name="modifiedOn" Type="datetime" Precision="0" />
           <Property Name="city" Type="varchar" MaxLength="45" />
           <Property Name="email" Type="varchar" MaxLength="45" />
+          <Property Name="pic" Type="longblob" />
         </EntityType>
         <EntityType Name="votes">
           <Key>
@@ -169,15 +190,53 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="idtrivia">
+          <End Role="trivia" Type="Self.trivia" Multiplicity="0..1" />
+          <End Role="triviapoints" Type="Self.triviapoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trivia">
+              <PropertyRef Name="idtrivia" />
+            </Principal>
+            <Dependent Role="triviapoints">
+              <PropertyRef Name="qsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="uid_user">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="0..1" />
+          <End Role="triviapoints" Type="Self.triviapoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="triviapoints">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="userid">
+          <End Role="User_Profile" Type="Self.User_Profile" Multiplicity="0..1" />
+          <End Role="points" Type="Self.points" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="points">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cos420dbModelStoreContainer">
           <EntitySet Name="criteria" EntityType="Self.criteria" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="interests" EntityType="Self.interests" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="organization" EntityType="Self.organization" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="organization_has_votes" EntityType="Self.organization_has_votes" Schema="cos420db" store:Type="Tables" />
+          <EntitySet Name="points" EntityType="Self.points" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="rewards" EntityType="Self.rewards" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="rewards_has_User_Profile" EntityType="Self.rewards_has_User_Profile" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="transactions" EntityType="Self.transactions" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="trivia" EntityType="Self.trivia" Schema="cos420db" store:Type="Tables" />
+          <EntitySet Name="triviapoints" EntityType="Self.triviapoints" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="User_Profile" EntityType="Self.User_Profile" Schema="cos420db" store:Type="Tables" />
           <EntitySet Name="votes" EntityType="Self.votes" Schema="cos420db" store:Type="Tables" />
           <AssociationSet Name="fk_organization_interests1" Association="Self.fk_organization_interests1">
@@ -200,35 +259,27 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             <End Role="User_Profile" EntitySet="User_Profile" />
             <End Role="votes" EntitySet="votes" />
           </AssociationSet>
+          <AssociationSet Name="idtrivia" Association="Self.idtrivia">
+            <End Role="trivia" EntitySet="trivia" />
+            <End Role="triviapoints" EntitySet="triviapoints" />
+          </AssociationSet>
+          <AssociationSet Name="uid_user" Association="Self.uid_user">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="triviapoints" EntitySet="triviapoints" />
+          </AssociationSet>
+          <AssociationSet Name="userid" Association="Self.userid">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="points" EntitySet="points" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cos420dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User_Profile">
-          <Key>
-            <PropertyRef Name="uid" />
-          </Key>
-          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="fName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="lName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="mobileNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="zipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="modifiedOn" Type="DateTime" />
-          <Property Name="city" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="rewards_has_User_Profile" Relationship="cos420dbModel.fk_rewards_has_User_Profile_User_Profile1" FromRole="User_Profile" ToRole="rewards_has_User_Profile" />
-          <NavigationProperty Name="transactions" Relationship="cos420dbModel.fk_transactions_User_Profile" FromRole="User_Profile" ToRole="transaction" />
-          <NavigationProperty Name="votes" Relationship="cos420dbModel.fk_votes_User_Profile1" FromRole="User_Profile" ToRole="vote" />
-        </EntityType>
         <EntityContainer Name="cos420dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="User_Profile" EntityType="Self.User_Profile" />
           <EntitySet Name="criteria" EntityType="cos420dbModel.criterion" />
           <EntitySet Name="interests" EntityType="cos420dbModel.interest" />
           <EntitySet Name="organizations" EntityType="cos420dbModel.organization" />
-          <EntitySet Name="organization_has_votes" EntityType="cos420dbModel.organization_has_votes" />
           <EntitySet Name="rewards" EntityType="cos420dbModel.reward" />
           <EntitySet Name="rewards_has_User_Profile" EntityType="cos420dbModel.rewards_has_User_Profile" />
           <EntitySet Name="transactions" EntityType="cos420dbModel.transaction" />
@@ -241,6 +292,19 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             <End Role="interest" EntitySet="interests" />
             <End Role="organization" EntitySet="organizations" />
           </AssociationSet>
+          <EntitySet Name="trivias" EntityType="cos420dbModel.trivia" />
+          <EntitySet Name="triviapoints" EntityType="cos420dbModel.triviapoint" />
+          <AssociationSet Name="idtrivia" Association="cos420dbModel.idtrivia">
+            <End Role="trivia" EntitySet="trivias" />
+            <End Role="triviapoint" EntitySet="triviapoints" />
+          </AssociationSet>
+          <EntitySet Name="organization_has_votes" EntityType="cos420dbModel.organization_has_votes" />
+          <EntitySet Name="points" EntityType="cos420dbModel.point" />
+          <EntitySet Name="User_Profile" EntityType="cos420dbModel.User_Profile" />
+          <AssociationSet Name="userid" Association="cos420dbModel.userid">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="point" EntitySet="points" />
+          </AssociationSet>
           <AssociationSet Name="fk_rewards_has_User_Profile_User_Profile1" Association="cos420dbModel.fk_rewards_has_User_Profile_User_Profile1">
             <End Role="User_Profile" EntitySet="User_Profile" />
             <End Role="rewards_has_User_Profile" EntitySet="rewards_has_User_Profile" />
@@ -249,11 +313,14 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             <End Role="User_Profile" EntitySet="User_Profile" />
             <End Role="transaction" EntitySet="transactions" />
           </AssociationSet>
+          <AssociationSet Name="uid_user" Association="cos420dbModel.uid_user">
+            <End Role="User_Profile" EntitySet="User_Profile" />
+            <End Role="triviapoint" EntitySet="triviapoints" />
+          </AssociationSet>
           <AssociationSet Name="fk_votes_User_Profile1" Association="cos420dbModel.fk_votes_User_Profile1">
             <End Role="User_Profile" EntitySet="User_Profile" />
             <End Role="vote" EntitySet="votes" />
           </AssociationSet>
-          <EntitySet Name="trivias" EntityType="cos420dbModel.trivia" />
         </EntityContainer>
         <EntityType Name="criterion">
           <Key>
@@ -283,14 +350,6 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
           <Property Name="interests_id" Type="Int32" Nullable="false" />
           <Property Name="region" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="interest" Relationship="cos420dbModel.fk_organization_interests1" FromRole="organization" ToRole="interest" />
-        </EntityType>
-        <EntityType Name="organization_has_votes">
-          <Key>
-            <PropertyRef Name="organization_id" />
-            <PropertyRef Name="votes_id" />
-          </Key>
-          <Property Name="organization_id" Type="Int32" Nullable="false" />
-          <Property Name="votes_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="reward">
           <Key>
@@ -356,6 +415,93 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="trivia">
+          <Key>
+            <PropertyRef Name="idtrivia" />
+          </Key>
+          <Property Name="idtrivia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="answer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="wrong1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="wrong2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="points" Type="Int32" />
+          <NavigationProperty Name="triviapoints" Relationship="cos420dbModel.idtrivia" FromRole="trivia" ToRole="triviapoint" />
+        </EntityType>
+        <EntityType Name="triviapoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Points" Type="Double" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="qsid" Type="Int32" />
+          <NavigationProperty Name="trivia" Relationship="cos420dbModel.idtrivia" FromRole="triviapoint" ToRole="trivia" />
+          <NavigationProperty Name="User_Profile" Relationship="cos420dbModel.uid_user" FromRole="triviapoint" ToRole="User_Profile" />
+        </EntityType>
+        <Association Name="idtrivia">
+          <End Type="cos420dbModel.trivia" Role="trivia" Multiplicity="0..1" />
+          <End Type="cos420dbModel.triviapoint" Role="triviapoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trivia">
+              <PropertyRef Name="idtrivia" />
+            </Principal>
+            <Dependent Role="triviapoint">
+              <PropertyRef Name="qsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="organization_has_votes">
+          <Key>
+            <PropertyRef Name="organization_id" />
+            <PropertyRef Name="votes_id" />
+          </Key>
+          <Property Name="organization_id" Type="Int32" Nullable="false" />
+          <Property Name="votes_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="point">
+          <Key>
+            <PropertyRef Name="idpoints" />
+          </Key>
+          <Property Name="idpoints" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="points" Type="Int32" />
+          <Property Name="datemodified" Type="DateTime" />
+          <Property Name="userid" Type="Int32" />
+          <NavigationProperty Name="User_Profile" Relationship="cos420dbModel.userid" FromRole="point" ToRole="User_Profile" />
+        </EntityType>
+        <EntityType Name="User_Profile">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="mobileNo" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="zipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="modifiedOn" Type="DateTime" />
+          <Property Name="city" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="points" Relationship="cos420dbModel.userid" FromRole="User_Profile" ToRole="point" />
+          <NavigationProperty Name="rewards_has_User_Profile" Relationship="cos420dbModel.fk_rewards_has_User_Profile_User_Profile1" FromRole="User_Profile" ToRole="rewards_has_User_Profile" />
+          <NavigationProperty Name="transactions" Relationship="cos420dbModel.fk_transactions_User_Profile" FromRole="User_Profile" ToRole="transaction" />
+          <NavigationProperty Name="triviapoints" Relationship="cos420dbModel.uid_user" FromRole="User_Profile" ToRole="triviapoint" />
+          <NavigationProperty Name="votes" Relationship="cos420dbModel.fk_votes_User_Profile1" FromRole="User_Profile" ToRole="vote" />
+        </EntityType>
+        <Association Name="userid">
+          <End Type="cos420dbModel.User_Profile" Role="User_Profile" Multiplicity="0..1" />
+          <End Type="cos420dbModel.point" Role="point" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="point">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_rewards_has_User_Profile_User_Profile1">
           <End Type="cos420dbModel.User_Profile" Role="User_Profile" Multiplicity="1" />
           <End Type="cos420dbModel.rewards_has_User_Profile" Role="rewards_has_User_Profile" Multiplicity="*" />
@@ -380,6 +526,18 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="uid_user">
+          <End Type="cos420dbModel.User_Profile" Role="User_Profile" Multiplicity="0..1" />
+          <End Type="cos420dbModel.triviapoint" Role="triviapoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile">
+              <PropertyRef Name="uid" />
+            </Principal>
+            <Dependent Role="triviapoint">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_votes_User_Profile1">
           <End Type="cos420dbModel.User_Profile" Role="User_Profile" Multiplicity="1" />
           <End Type="cos420dbModel.vote" Role="vote" Multiplicity="*" />
@@ -392,38 +550,12 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="trivia">
-          <Key>
-            <PropertyRef Name="idtrivia" />
-          </Key>
-          <Property Name="idtrivia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="question" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="answer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="wrong1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="wrong2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="cos420dbModelStoreContainer" CdmEntityContainer="cos420dbEntities">
-          <EntitySetMapping Name="User_Profile">
-            <EntityTypeMapping TypeName="cos420dbModel.User_Profile">
-              <MappingFragment StoreEntitySet="User_Profile">
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="uid" ColumnName="uid" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="fName" ColumnName="fName" />
-                <ScalarProperty Name="lName" ColumnName="lName" />
-                <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
-                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
-                <ScalarProperty Name="modifiedOn" ColumnName="modifiedOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="criteria">
             <EntityTypeMapping TypeName="cos420dbModel.criterion">
               <MappingFragment StoreEntitySet="criteria">
@@ -449,14 +581,6 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="organization_has_votes">
-            <EntityTypeMapping TypeName="cos420dbModel.organization_has_votes">
-              <MappingFragment StoreEntitySet="organization_has_votes">
-                <ScalarProperty Name="votes_id" ColumnName="votes_id" />
-                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -499,11 +623,58 @@ warning 6035: The relationship 'fk_rewards_has_User_Profile_rewards1' has column
           <EntitySetMapping Name="trivias">
             <EntityTypeMapping TypeName="cos420dbModel.trivia">
               <MappingFragment StoreEntitySet="trivia">
+                <ScalarProperty Name="points" ColumnName="points" />
                 <ScalarProperty Name="wrong2" ColumnName="wrong2" />
                 <ScalarProperty Name="wrong1" ColumnName="wrong1" />
                 <ScalarProperty Name="answer" ColumnName="answer" />
                 <ScalarProperty Name="question" ColumnName="question" />
                 <ScalarProperty Name="idtrivia" ColumnName="idtrivia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="triviapoints">
+            <EntityTypeMapping TypeName="cos420dbModel.triviapoint">
+              <MappingFragment StoreEntitySet="triviapoints">
+                <ScalarProperty Name="qsid" ColumnName="qsid" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="organization_has_votes">
+            <EntityTypeMapping TypeName="cos420dbModel.organization_has_votes">
+              <MappingFragment StoreEntitySet="organization_has_votes">
+                <ScalarProperty Name="votes_id" ColumnName="votes_id" />
+                <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="points">
+            <EntityTypeMapping TypeName="cos420dbModel.point">
+              <MappingFragment StoreEntitySet="points">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="datemodified" ColumnName="datemodified" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="idpoints" ColumnName="idpoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Profile">
+            <EntityTypeMapping TypeName="cos420dbModel.User_Profile">
+              <MappingFragment StoreEntitySet="User_Profile">
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="modifiedOn" ColumnName="modifiedOn" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

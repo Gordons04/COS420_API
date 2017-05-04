@@ -1,22 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="cos420dbModelStoreContainer" CdmEntityContainer="cos420dbEntities">
-    <EntitySetMapping Name="User_Profile">
-      <EntityTypeMapping TypeName="cos420dbModel.User_Profile">
-        <MappingFragment StoreEntitySet="User_Profile">
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="city" ColumnName="city" />
-          <ScalarProperty Name="uid" ColumnName="uid" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="fName" ColumnName="fName" />
-          <ScalarProperty Name="lName" ColumnName="lName" />
-          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
-          <ScalarProperty Name="zipCode" ColumnName="zipCode" />
-          <ScalarProperty Name="modifiedOn" ColumnName="modifiedOn" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="criteria">
       <EntityTypeMapping TypeName="cos420dbModel.criterion">
         <MappingFragment StoreEntitySet="criteria">
@@ -42,14 +26,6 @@
           <ScalarProperty Name="city" ColumnName="city" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="organization_has_votes">
-      <EntityTypeMapping TypeName="cos420dbModel.organization_has_votes">
-        <MappingFragment StoreEntitySet="organization_has_votes">
-          <ScalarProperty Name="votes_id" ColumnName="votes_id" />
-          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -92,11 +68,58 @@
     <EntitySetMapping Name="trivias">
       <EntityTypeMapping TypeName="cos420dbModel.trivia">
         <MappingFragment StoreEntitySet="trivia">
+          <ScalarProperty Name="points" ColumnName="points" />
           <ScalarProperty Name="wrong2" ColumnName="wrong2" />
           <ScalarProperty Name="wrong1" ColumnName="wrong1" />
           <ScalarProperty Name="answer" ColumnName="answer" />
           <ScalarProperty Name="question" ColumnName="question" />
           <ScalarProperty Name="idtrivia" ColumnName="idtrivia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="triviapoints">
+      <EntityTypeMapping TypeName="cos420dbModel.triviapoint">
+        <MappingFragment StoreEntitySet="triviapoints">
+          <ScalarProperty Name="qsid" ColumnName="qsid" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="organization_has_votes">
+      <EntityTypeMapping TypeName="cos420dbModel.organization_has_votes">
+        <MappingFragment StoreEntitySet="organization_has_votes">
+          <ScalarProperty Name="votes_id" ColumnName="votes_id" />
+          <ScalarProperty Name="organization_id" ColumnName="organization_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="points">
+      <EntityTypeMapping TypeName="cos420dbModel.point">
+        <MappingFragment StoreEntitySet="points">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="datemodified" ColumnName="datemodified" />
+          <ScalarProperty Name="points" ColumnName="points" />
+          <ScalarProperty Name="idpoints" ColumnName="idpoints" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Profile">
+      <EntityTypeMapping TypeName="cos420dbModel.User_Profile">
+        <MappingFragment StoreEntitySet="User_Profile">
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="modifiedOn" ColumnName="modifiedOn" />
+          <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="lName" ColumnName="lName" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ResourceServer.Api.Controllers
 {
@@ -24,6 +25,7 @@ namespace ResourceServer.Api.Controllers
         /// </summary>
         /// <param name="body">{"UserName":"user",	"Password":"pass#word1"} </param>
         /// <returns>True or False</returns>
+        [ResponseType(typeof(Boolean))]
         [HttpPost]
         [Route("Login")]
         public IHttpActionResult Login([FromBody]dynamic body)

@@ -5,21 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="34cb6b2917e84da4932ef1be2a11951e" Name="Diagram1">
-        <EntityTypeShape EntityType="cos420dbModel.User_Profile" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="cos420dbModel.criterion" Width="1.5" PointX="3.375" PointY="1" />
-        <EntityTypeShape EntityType="cos420dbModel.interest" Width="1.5" PointX="5.375" PointY="4.375" />
-        <EntityTypeShape EntityType="cos420dbModel.organization" Width="1.5" PointX="7.625" PointY="4" />
-        <EntityTypeShape EntityType="cos420dbModel.organization_has_votes" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="cos420dbModel.interest" Width="1.5" PointX="5.125" PointY="3.5" />
+        <EntityTypeShape EntityType="cos420dbModel.organization" Width="1.5" PointX="7.625" PointY="4.5" />
         <EntityTypeShape EntityType="cos420dbModel.reward" Width="1.5" PointX="5.625" PointY="0.875" />
         <EntityTypeShape EntityType="cos420dbModel.rewards_has_User_Profile" Width="1.5" PointX="3" PointY="10.375" />
         <EntityTypeShape EntityType="cos420dbModel.transaction" Width="1.5" PointX="3" PointY="7.625" />
         <EntityTypeShape EntityType="cos420dbModel.vote" Width="1.5" PointX="3" PointY="5" />
         <AssociationConnector Association="cos420dbModel.fk_rewards_criteria1" />
         <AssociationConnector Association="cos420dbModel.fk_organization_interests1" />
+        <EntityTypeShape EntityType="cos420dbModel.trivia" Width="1.5" PointX="5.75" PointY="12.125" />
+        <EntityTypeShape EntityType="cos420dbModel.triviapoint" Width="1.5" PointX="8" PointY="7.5" />
+        <AssociationConnector Association="cos420dbModel.idtrivia" />
+        <EntityTypeShape EntityType="cos420dbModel.organization_has_votes" Width="1.5" PointX="7.875" PointY="1" />
+        <EntityTypeShape EntityType="cos420dbModel.point" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="cos420dbModel.User_Profile" Width="1.5" PointX="0.5" PointY="4.375" />
+        <AssociationConnector Association="cos420dbModel.userid" />
         <AssociationConnector Association="cos420dbModel.fk_rewards_has_User_Profile_User_Profile1" />
         <AssociationConnector Association="cos420dbModel.fk_transactions_User_Profile" />
+        <AssociationConnector Association="cos420dbModel.uid_user" />
         <AssociationConnector Association="cos420dbModel.fk_votes_User_Profile1" />
-        <EntityTypeShape EntityType="cos420dbModel.trivia" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
