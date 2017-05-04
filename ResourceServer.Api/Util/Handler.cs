@@ -387,7 +387,9 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.trivias.AsEnumerable()
-                            select new { Question = d.question, Qid = d.idtrivia, Answers = new String[] {d.answer, d.wrong1, d.wrong2 }, Correct = new Random().Next(0,2), Points = d.points }).ToList();
+                           // from e in dbModel.triviapoints.AsEnumerable()
+                           // where ! (d.idtrivia == e.qsid && e.Date.Value.Date == DateTime.UtcNow.Date )
+                            select new { Question = d.question, Qid = d.idtrivia, Answers = new String[] {d.answer, d.wrong1, d.wrong2 }, Correct = new Random().Next(0,2), Points = d.points }).Distinct().ToList();
 
                 return list;
             }
@@ -474,7 +476,7 @@ namespace ResourceServer.Api.Util
             try
             {
                 var list = (from d in dbModel.points join e in dbModel.User_Profile on d.userid equals e.uid orderby d.points descending
-                             select new {FirstName  = e.fName, LastName = e.lName, d.points, d.datemodified, e.pic }).Take(20).ToList();
+                             select new {FirstName  = e.fName, LastName = e.lName, Points = d.points, Date = d.datemodified, Pic =  e.pic }).Take(20).ToList();
 
                 return list;
             }
